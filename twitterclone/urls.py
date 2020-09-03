@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from twitteruser import views as userviews
+from authentication import views as authviews
 
 urlpatterns = [
+    path('', userviews.index, name='home'),
+    path('login/', authviews.login_view, name='login'),
+    path('logout/', authviews.logout_view, name='logout'),
+    path('signup/', userviews.signup_view, name='signup'),
     path('admin/', admin.site.urls),
 ]
