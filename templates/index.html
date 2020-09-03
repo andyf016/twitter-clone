@@ -1,5 +1,7 @@
 <ul>
 {% for tweet in tweets %}
-<li>{tweet.body}</li>
+<li>{{tweet.body}}</li>
+<li>{{tweet.author}}</li>
+<li>{{tweet.time_stamp}}</li>
 {% endfor %}
 </ul>
