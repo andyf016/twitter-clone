@@ -30,6 +30,10 @@ def signup_view(request):
     return render(request, 'generic_form.html', {'form': form})
 
 
+def follow_view(request, user_id):
+    following = FollowingUser.objects.get_or_create(owner=request.user, is_following=is_following.set(user_id))
+    
+
 """
     @classmethod
     def follow(cls, current_user, following):
