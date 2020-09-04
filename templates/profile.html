@@ -1,0 +1,9 @@
+{{profile_user.username}}
+<br>
+{{tweet_count}}
+<br>
+{% for tweet in profile_tweets %}
+{{tweet.body}}
+<br>
+{{tweet.timestamp}}
+{% endfor %}

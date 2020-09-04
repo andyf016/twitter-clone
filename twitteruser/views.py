@@ -6,12 +6,12 @@ from twitteruser.models import CustomUser, FollowingUser
 from twitteruser.forms import SignUpForm
 from tweet.models import Tweet
 
-
+@login_required
 def index(request):
-    #current_user = CustomUser.objects.get(username=request.user)
+    current_user = CustomUser.objects.get(username=request.user)
     #following = FollowingUser.objects.filter(owner=request.user)
     tweets = Tweet.objects.all()
-    return render(request, 'index.html', {'tweets': tweets}) 
+    return render(request, 'index.html', {'tweets': tweets, 'current_user': current_user}) 
 
 
 def signup_view(request):
@@ -33,23 +33,19 @@ def signup_view(request):
 
 
 def follow_view(request, user_id):
-    current_user = request.user
-    follow_target = CustomUser.objects.get(id=user_id)
-    new_relation = FollowingUser.objects.get_or_create(owner=current_user, is_following=follow_target)
-    # new_relation.save()
+    pass
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def unfollow_view(request, user_id):
-    current_user = request.user
-    unfollow_target = CustomUser.objects.get(id=user_id)
-    target = FollowingUser.objects.filter(owner=current_user, is_following=unfollow_target)
-    target.delete()
+    pass
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
 
 def profile_view(request, user_id):
-    profile_user = CustomUser.objects.get(id=user_id):
-    profile_tweets = Tweets.object.filter(author=profile_user.username)
+    profile_user = CustomUser.objects.filter(id=user_id).first()
+    # profile_tweets = Tweet.objects.filter(author=profile_user.username)
+    tweet_count = Tweet.objects.filter(author_id=user_id).count()
+    return render(request, 'profile.html', {"profile_user":profile_user, "tweet_count": tweet_count})
     # add number of and possibly list of followers
 
 
