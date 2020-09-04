@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'twitteruser',
     'tweet',
+    'notification',
 ]
 
 MIDDLEWARE = [

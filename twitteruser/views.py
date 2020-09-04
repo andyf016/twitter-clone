@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from twitteruser.models import CustomUser
 from twitteruser.forms import SignUpForm
 from tweet.models import Tweet
+from notification.models import Notification
 
 @login_required
 def index(request):
@@ -27,6 +28,7 @@ def signup_view(request):
                 location = data.get("location"),
                 birthday = data.get("birthday"))
             login(request, new_user)
+            Notification.objects.c
             return HttpResponseRedirect(reverse("homepage"))
     form = SignUpForm()
     return render(request, 'generic_form.html', {'form': form})

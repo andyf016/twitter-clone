@@ -3,3 +3,7 @@
     {{ form.as_p }}
 <input type="submit" value="Submit!">
 </form>
+
+{% if request.get_full_path == "/login/"%}
+<a href="/signup/">Sign-Up</a>
+{% endif %}
