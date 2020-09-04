@@ -7,7 +7,7 @@ class CustomUser(AbstractUser):
     age = models.IntegerField(null=True, blank=True)
     location = models.TextField(max_length=180, null=True, blank=True)
     birthday = models.DateField(null=True, blank=True)
-    # Ask about logic in model
+    following = models.ManyToManyField("self", related_name='following')
 
     def __str__(self):
         return self.username

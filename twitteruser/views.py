@@ -32,19 +32,26 @@ def signup_view(request):
 
 
 def follow_view(request, user_id):
-    pass
+    current_user = CustomUser.objects.get(username=request.user)
+    to_follow = CustomUser.objects.filter(id=user_id).first()
+    current_user.following.add(to_follow)
+    current_user.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def unfollow_view(request, user_id):
-    pass
+    current_user = CustomUser.objects.get(username=request.user)
+    to_unfollow = CustomUser.objects.filter(id=user_id).first()
+    current_user.following.remove(to_unfollow)
+    current_user.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
 
 def profile_view(request, user_id):
     profile_user = CustomUser.objects.filter(id=user_id).first()
+    followers = profile_user.following.all()
     # profile_tweets = Tweet.objects.filter(author=profile_user.username)
     tweet_count = Tweet.objects.filter(author_id=user_id).count()
-    return render(request, 'profile.html', {"profile_user":profile_user, "tweet_count": tweet_count})
+    return render(request, 'profile.html', {"profile_user":profile_user, "tweet_count": tweet_count, "followers": followers})
     # add number of and possibly list of followers
 
 
