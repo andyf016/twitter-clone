@@ -15,10 +15,12 @@ class CustomUser(AbstractUser):
 class FollowingUser(models.Model):
     # modeled after code from unicdev on stackoverflow.com
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, editable=False, related_name="owner")
-    is_following = models.ManyToManyField(CustomUser, editable=False, related_name="followers")
+    is_following = models.ForeignKey(CustomUser, on_delete=models.CASCADE, editable=False, related_name="followers")
     created = models.DateField(default=timezone.now, editable=False)
 
-
+    class Meta:
+        unique_together = ("owner", "is_following")
+        ordering = ["-created"]
 
     def __str__(self):
-        f"{self.user_id}'s following list"
+        return f"{self.owner} follows {self.is_following}"

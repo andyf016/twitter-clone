@@ -8,7 +8,8 @@ from tweet.models import Tweet
 
 
 def index(request):
-    tweets = Tweet.objects.all()
+    following = FollowingUser.objects.filter(owner=request.user)
+    tweets = Tweet.objects.filter(author=following.is_following)
     return render(request, 'index.html', {'tweets': tweets}) 
 
 
@@ -31,7 +32,18 @@ def signup_view(request):
 
 
 def follow_view(request, user_id):
-    following = FollowingUser.objects.get_or_create(owner=request.user, is_following=is_following.set(user_id))
+    current_user = request.user
+    follow_target = CustomUser.objects.get(id=user_id)
+    new_relation = FollowingUser.objects.get_or_create(owner=current_user, is_following=follow_target)
+    # new_relation.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def unfollow_view(request, user_id):
+    current_user = request.user
+    unfollow_target = CustomUser.objects.get(id=user_id)
+    target = FollowingUser.objects.filter(owner=current_user, is_following=unfollow_target)
+    target.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
 
 """
