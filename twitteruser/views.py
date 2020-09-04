@@ -8,8 +8,9 @@ from tweet.models import Tweet
 
 
 def index(request):
+    current_user = CustomUser.objects.get(username=request.user)
     following = FollowingUser.objects.filter(owner=request.user)
-    tweets = Tweet.objects.filter(author=following.is_following)
+    tweets = Tweet.objects.filter(author__is_following__=current_user)
     return render(request, 'index.html', {'tweets': tweets}) 
 
 
