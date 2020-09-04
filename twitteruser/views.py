@@ -2,14 +2,13 @@ from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-from twitteruser.models import CustomUser, FollowingUser
+from twitteruser.models import CustomUser
 from twitteruser.forms import SignUpForm
 from tweet.models import Tweet
 
 @login_required
 def index(request):
     current_user = CustomUser.objects.get(username=request.user)
-    #following = FollowingUser.objects.filter(owner=request.user)
     tweets = Tweet.objects.all()
     return render(request, 'index.html', {'tweets': tweets, 'current_user': current_user}) 
 
