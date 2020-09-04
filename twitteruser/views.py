@@ -9,7 +9,8 @@ from tweet.models import Tweet
 @login_required
 def index(request):
     current_user = CustomUser.objects.get(username=request.user)
-    tweets = Tweet.objects.all()
+    tweets = Tweet.objects.filter(author__in=current_user.following.all()) | Tweet.objects.filter(author=current_user)
+    
     return render(request, 'index.html', {'tweets': tweets, 'current_user': current_user}) 
 
 
