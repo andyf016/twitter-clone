@@ -18,4 +18,8 @@ def tweet_form_view(request):
             return HttpResponseRedirect(reverse('home'))
     form = TweetForm()
     return render(request, "generic_form.html", {'form': form})
-            
+
+def tweet_view(request, tweet_id):
+    current_tweet = Tweet.objects.get(id=tweet_id)
+    return render(request, "tweet_detail.html", {'tweet':current_tweet})
+

@@ -8,9 +8,9 @@ from tweet.models import Tweet
 
 
 def index(request):
-    current_user = CustomUser.objects.get(username=request.user)
-    following = FollowingUser.objects.filter(owner=request.user)
-    tweets = Tweet.objects.filter(author__is_following__=current_user)
+    #current_user = CustomUser.objects.get(username=request.user)
+    #following = FollowingUser.objects.filter(owner=request.user)
+    tweets = Tweet.objects.all()
     return render(request, 'index.html', {'tweets': tweets}) 
 
 
@@ -46,6 +46,12 @@ def unfollow_view(request, user_id):
     target.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
+
+def profile_view(request, user_id):
+    profile_user = CustomUser.objects.get(id=user_id):
+    profile_tweets = Tweets.object.filter(author=profile_user.username)
+    # add number of and possibly list of followers
+
 
 """
     @classmethod

@@ -21,9 +21,11 @@ from tweet import views as tweetviews
 
 urlpatterns = [
     path('', userviews.index, name='home'),
+    path('profile/<int:user_id>', userviews.profile_view, name='profile'),
     path('following/<int:user_id>/', userviews.follow_view, name='follow'),
     path('unfollow/<int:user_id>/', userviews.unfollow_view),
     path('newtweet/', tweetviews.tweet_form_view, name='newtweet'),
+    path('tweet/<int:tweet_id>', tweetviews.tweet_view, name='tweet'),
     path('login/', authviews.login_view, name='login'),
     path('logout/', authviews.logout_view, name='logout'),
     path('signup/', userviews.signup_view, name='signup'),

@@ -1,6 +1,6 @@
 <ul>
 {% for tweet in tweets %}
-<li>{{tweet.body}}</li>
+<a href="tweet/{{tweet.id}}"><li>{{tweet.body}}</li></a>
 <a href="following/{{tweet.author.id}}"><li>{{tweet.author}}</li></a>
 <a href="unfollow/{{tweet.author.id}}">XXXXXX</a>
 <li>{{tweet.time_stamp}}</li>
