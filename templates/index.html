@@ -1,9 +1,14 @@
-<a href="profile/{{current_user.id}}">My Profile</a> | <a href="newtweet/">New Tweet</a> | <a href="all_tweets/">All Tweets</a>
+{% extends "base.html" %}
+{% block content %}
 <ul>
 {% for tweet in tweets %}
+<div class='well'>
 <a href="tweet/{{tweet.id}}"><li>{{tweet.body}}</li></a>
 <a href="following/{{tweet.author.id}}"><li>{{tweet.author}}</li></a>
 <a href="unfollow/{{tweet.author.id}}">XXXXXX</a>
 <li>{{tweet.time_stamp}}</li>
+</div>
 {% endfor %}
 </ul>
+
+{% endblock %}
