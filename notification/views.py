@@ -14,4 +14,5 @@ def notification_view(request, user_id):
         if notification.read_flag == False:
             new_notifications.append(notification)
             notification.read_flag = True
+            notification.save()
     return render(request, 'notifications.html', {'new_notifications': new_notifications})
