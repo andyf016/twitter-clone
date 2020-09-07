@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-
+<div class="page-header">
+<h2>New Notifications</h2></div>
 {% for notify in new_notifications %}
+<div class='well'>
 {{notify.mention_tweets.body}}
+<br>
+<a href="/tweet/{{notify.mention_tweets.id}}"><button type="button" class="btn btn-info btn-xs">View</button></a>
+<br>
+{{notify.mention_tweets.time_stamp}}
+</div>
 {% endfor %}
 
 {% endblock %}

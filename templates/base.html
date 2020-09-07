@@ -20,6 +20,7 @@
       <li><a href="/all_tweets/">All Tweets</a></li>
       {% if request.user.is_authenticated %}
       <li><a href="/newtweet/">New Tweet</a></li>
+      <li><a href="/profile/{{request.user.id}}">My Profile</a></li>
       <li><a href="/notification/{{request.user.id}}">Notifications</a></li>
       <li><a href="/logout/">Logout</a></li>
       {% else %}
