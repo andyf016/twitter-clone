@@ -1,14 +1,31 @@
-{{profile_user.username}}
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>{{profile_user.username}}'s Profile</h2></div>
+
+
 <br>
-{{tweet_count}}
-<br>
+<h4>Tweet Count: <span class="badge">{{tweet_count}}</span></h4>
+
 {% for tweet in profile_tweets %}
-{{tweet.body}}
-<br>
-{{tweet.timestamp}}
+
+    <div class='well'>
+        {{tweet.body}}
+        <br>
+        {{tweet.time_stamp}}
+        <br>
+        <a href="/tweet/{{tweet.id}}"><button type="button" class="btn btn-info btn-xs">View</button></a>
+    </div>
+
 {% endfor %}
 <br>
-{% for follower in followers %}
-{{follower}}
-{% endfor %}
-follower: {{follower_count}}
+
+    <h4>Currently Following: <span class="badge">{{follower_count}}</span></h4>
+
+
+<ul class="list-group">
+    {% for follower in followers %}
+    <li class="list-group-item">{{follower}}</li>
+    {% endfor %}
+</ul>
+    {% endblock %}

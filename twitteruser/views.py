@@ -11,7 +11,7 @@ from notification.models import Notification
 def index(request):
     current_user = CustomUser.objects.get(username=request.user)
     tweets = Tweet.objects.filter(author__in=current_user.following.all()) | Tweet.objects.filter(author=current_user)
-    tweets.order_by('-time_stamp')
+    tweets = tweets.order_by('-time_stamp')
     return render(request, 'index.html', {'tweets': tweets, 'current_user': current_user}) 
 
 

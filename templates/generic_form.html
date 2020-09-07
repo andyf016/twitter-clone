@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="page-header">
+    <h2>Welcome</h2></div>
 <div class="form-group">
 <form action="" method="post">
     {% csrf_token %}
@@ -8,7 +10,7 @@
 </form>
 </div>
 <br>
-
+{% if request.get_full_path != "/signup/"%}
 <a href="/signup/"><button type="button" class="btn btn-primary">Sign-Up</button></a>
-
+{% endif %}
 {% endblock %}
