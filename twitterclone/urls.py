@@ -22,6 +22,7 @@ from notification import views as notifyviews
 
 urlpatterns = [
     path('', userviews.index, name='home'),
+    path('all_tweets/', tweetviews.all_view, name='all'),
     path('profile/<int:user_id>', userviews.profile_view, name='profile'),
     path('following/<int:user_id>/', userviews.follow_view, name='follow'),
     path('unfollow/<int:user_id>/', userviews.unfollow_view),

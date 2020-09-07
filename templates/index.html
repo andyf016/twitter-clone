@@ -1,4 +1,4 @@
-<a href="profile/{{current_user.id}}">My Profile</a> | <a href="newtweet/">New Tweet</a>
+<a href="profile/{{current_user.id}}">My Profile</a> | <a href="newtweet/">New Tweet</a> | <a href="all_tweets/">All Tweets</a>
 <ul>
 {% for tweet in tweets %}
 <a href="tweet/{{tweet.id}}"><li>{{tweet.body}}</li></a>

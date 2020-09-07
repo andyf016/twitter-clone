@@ -1,0 +1,7 @@
+{% for tweet in all_tweets %}
+<div style="border:solid black">
+{{tweet.body}}
+<a href="/following/{{tweet.author.id}}"><li>{{tweet.author}}</li></a>
+<a href="unfollow/{{tweet.author.id}}">XXXXXX</a>
+</div>
+{% endfor %}

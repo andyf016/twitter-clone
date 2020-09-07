@@ -34,3 +34,7 @@ def tweet_view(request, tweet_id):
     current_tweet = Tweet.objects.get(id=tweet_id)
     return render(request, "tweet_detail.html", {'tweet':current_tweet})
 
+def all_view(request):
+    all_tweets = Tweet.objects.all().order_by('-time_stamp')
+    return render(request, "all_tweets.html", {"all_tweets": all_tweets})
+
