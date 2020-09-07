@@ -40,6 +40,8 @@ def follow_view(request, user_id):
     current_user.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
+@login_required
 def unfollow_view(request, user_id):
     current_user = CustomUser.objects.get(username=request.user)
     to_unfollow = CustomUser.objects.filter(id=user_id).first()
