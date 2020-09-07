@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+
 {% for notify in new_notifications %}
 {{notify.mention_tweets.body}}
 {% endfor %}
+
+{% endblock %}

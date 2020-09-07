@@ -22,7 +22,6 @@ def tweet_form_view(request):
             for match in matches:
                 users = CustomUser.objects.all()
                 name = match.group(1)
-                print(name)
                 try:
                     user = CustomUser.objects.get(username=name)
                     Notification.objects.create(owner=user, mention_tweets=newTweet)
@@ -30,7 +29,7 @@ def tweet_form_view(request):
                     pass
             return HttpResponseRedirect(reverse('home'))
     form = TweetForm()
-    return render(request, "generic_form.html", {'form': form})
+    return render(request, "new_tweet.html", {'form': form})
 
 def tweet_view(request, tweet_id):
     current_tweet = Tweet.objects.get(id=tweet_id)

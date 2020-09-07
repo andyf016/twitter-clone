@@ -16,10 +16,15 @@
       <a class="navbar-brand" href="/">Tweeter</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/">Home</a></li>
-      <li><a href="newtweet/">New Tweet</a></li>
-      <li><a href="profile/{{current_user.id}}">My Profile</a></li>
-      <li><a href="logout/">Logout</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/all_tweets/">All Tweets</a></li>
+      {% if request.user.is_authenticated %}
+      <li><a href="/newtweet/">New Tweet</a></li>
+      <li><a href="/notification/{{request.user.id}}">Notifications</a></li>
+      <li><a href="/logout/">Logout</a></li>
+      {% else %}
+      <li><a href="/login/">Login</a></li>
+      {% endif %}
     </ul>
   </div>
 </nav>

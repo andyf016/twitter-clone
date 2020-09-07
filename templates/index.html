@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<ul>
-{% for tweet in tweets %}
-<div class='well'>
-<a href="tweet/{{tweet.id}}"><li>{{tweet.body}}</li></a>
-<a href="following/{{tweet.author.id}}"><li>{{tweet.author}}</li></a>
-<a href="unfollow/{{tweet.author.id}}">XXXXXX</a>
-<li>{{tweet.time_stamp}}</li>
-</div>
-{% endfor %}
+<ul>    
+    {% for tweet in tweets %}
+    <div class='well'>
+        <a href="tweet/{{tweet.id}}"><li>{{tweet.body}}</li></a>
+        {% if current_user.id != tweet.author.id %}
+        <a href="unfollow/{{tweet.author.id}}"><li><button type="button" class="btn btn-info btn-xs">Stop Following {{tweet.author}}</button></li></a>
+        {% endif %}
+        <li>{{tweet.time_stamp}}</li>
+    </div>
+    {% endfor %}
 </ul>
 
+<a href="profile/{{current_user.id}}"><button type="button" class="btn btn-success">{{current_user}}'s Profile</button></a>
 {% endblock %}

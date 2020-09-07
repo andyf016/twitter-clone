@@ -1,7 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
 {% for tweet in all_tweets %}
-<div style="border:solid black">
+<div class='well'>
 {{tweet.body}}
-<a href="/following/{{tweet.author.id}}"><li>{{tweet.author}}</li></a>
-<a href="unfollow/{{tweet.author.id}}">XXXXXX</a>
+<br>
+<a href="/following/{{tweet.author.id}}"><button type="button" class="btn btn-info btn-xs">Follow {{tweet.author}}</button></a>
+<br>
+{{tweet.time_stamp}}
 </div>
 {% endfor %}
+{% endblock %}
