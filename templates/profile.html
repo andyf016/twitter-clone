@@ -2,8 +2,8 @@
 {% block content %}
 <div class="page-header">
     <h2>{{profile_user.username}}'s Profile</h2></div>
-
-
+    <a href="/following/{{profile_user.id}}"><button type="button" class="btn btn-info btn-xs">Follow</button></a>
+    <a href="/unfollow/{{profile_user.id}}"><button type="button" class="btn btn-info btn-xs">Stop Following</button></a>
 <br>
 <h4>Tweet Count: <span class="badge">{{tweet_count}}</span></h4>
 

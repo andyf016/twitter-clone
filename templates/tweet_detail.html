@@ -1,3 +1,10 @@
-{{tweet.body}}
-<a href="/following/{{tweet.author.id}}">{{tweet.author}}</a>
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>Tweet Detail</h2></div>  
+<div class="well">
+<p>{{tweet.body}}</p>
+<p>By: <a href="/profile/{{tweet.author.id}}">{{tweet.author}}</a></p>
 {{tweet.time_stamp}}
+</div>
+{% endblock %}
