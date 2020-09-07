@@ -23,9 +23,11 @@ def tweet_form_view(request):
                 users = CustomUser.objects.all()
                 name = match.group(1)
                 print(name)
-                if CustomUser.objects.filter(username__in=name):
+                try:
                     user = CustomUser.objects.get(username=name)
                     Notification.objects.create(owner=user, mention_tweets=newTweet)
+                except:
+                    pass
             return HttpResponseRedirect(reverse('home'))
     form = TweetForm()
     return render(request, "generic_form.html", {'form': form})
