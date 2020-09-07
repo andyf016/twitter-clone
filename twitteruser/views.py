@@ -52,17 +52,9 @@ def unfollow_view(request, user_id):
 def profile_view(request, user_id):
     profile_user = CustomUser.objects.filter(id=user_id).first()
     followers = profile_user.following.all()
-    # profile_tweets = Tweet.objects.filter(author=profile_user.username)
+    profile_tweets = Tweet.objects.filter(author_id=user_id)
     tweet_count = Tweet.objects.filter(author_id=user_id).count()
-    return render(request, 'profile.html', {"profile_user":profile_user, "tweet_count": tweet_count, "followers": followers})
+    return render(request, 'profile.html', {"profile_user":profile_user, "tweet_count": tweet_count, "followers": followers, "profile_tweets": profile_tweets})
     # add number of and possibly list of followers
 
 
-"""
-    @classmethod
-    def follow(cls, current_user, following):
-        following, created = cls.objects.get_or_create(
-            current_user=current_user
-        )
-        following.owner.add(following)
-"""
