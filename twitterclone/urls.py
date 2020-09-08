@@ -31,6 +31,6 @@ urlpatterns = [
     path('notification/<int:user_id>', notifyviews.notification_view, name='notify'),
     path('login/', authviews.login_view, name='login'),
     path('logout/', authviews.logout_view, name='logout'),
-    path('signup/', userviews.signup_view, name='signup'),
+    path('signup/', userviews.SignUpView.as_view(), name='signup'),
     path('admin/', admin.site.urls),
 ]

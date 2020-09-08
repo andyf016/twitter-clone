@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
 from twitteruser.models import CustomUser
 from twitteruser.forms import SignUpForm
@@ -31,6 +32,32 @@ def signup_view(request):
             return HttpResponseRedirect(reverse("home"))
     form = SignUpForm()
     return render(request, 'generic_form.html', {'form': form})
+
+
+class SignUpView(TemplateView):
+
+    def get(self, request):
+        form = SignUpForm()
+        return render(request, 'generic_form.html', {'form': form})
+    
+    def post(self, request):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            new_user = CustomUser.objects.create_user(
+                username = data.get("username"),
+                password = data.get("password"),
+                bio = data.get("bio"),
+                age = data.get("age"),
+                location = data.get("location"),
+                birthday = data.get("birthday"))
+            login(request, new_user)
+            return HttpResponseRedirect(reverse("home"))
+        else:
+            return render(request, "generic_form.html", {"form": form})
+
+
+
 
 @login_required
 def follow_view(request, user_id):
