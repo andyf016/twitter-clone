@@ -32,9 +32,17 @@ def tweet_form_view(request):
     form = TweetForm()
     return render(request, "new_tweet.html", {'form': form})
 
-def tweet_view(request, tweet_id):
-    current_tweet = Tweet.objects.get(id=tweet_id)
-    return render(request, "tweet_detail.html", {'tweet':current_tweet})
+
+class TweetDetailView(TemplateView):
+
+    def get(self, request, tweet_id):
+        current_tweet = Tweet.objects.get(id=tweet_id)
+        return render(request, "tweet_detail.html", {'tweet':current_tweet})
+
+
+# def tweet_view(request, tweet_id):
+#     current_tweet = Tweet.objects.get(id=tweet_id)
+#     return render(request, "tweet_detail.html", {'tweet':current_tweet})
 
 def all_view(request):
     all_tweets = Tweet.objects.all().order_by('-time_stamp')
