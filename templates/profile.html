@@ -2,9 +2,16 @@
 {% block content %}
 <div class="page-header">
     <h2>{{profile_user.username}}'s Profile</h2></div>
+    {% if request.user.username != profile_user.username %}
     <a href="/following/{{profile_user.id}}"><button type="button" class="btn btn-info btn-xs">Follow</button></a>
     <a href="/unfollow/{{profile_user.id}}"><button type="button" class="btn btn-info btn-xs">Stop Following</button></a>
-<br>
+    {% endif %}
+    <br>
+<ul class="list-group">
+    <li class="list-group-item"><b>Bio:</b> {{profile_user.bio}}</li>
+    <li class="list-group-item"><b>Location:</b> {{profile_user.location}}</li>
+    <li class="list-group-item"><b>Birthday:</b> {{profile_user.birthday}}</li>
+</ul>
 <h4>Tweet Count: <span class="badge">{{tweet_count}}</span></h4>
 
 {% for tweet in profile_tweets %}
@@ -25,7 +32,7 @@
 
 <ul class="list-group">
     {% for follower in followers %}
-    <li class="list-group-item">{{follower}}</li>
+    <li class="list-group-item"><a href="/profile/{{follower.id}}">{{follower}}</a></li>
     {% endfor %}
 </ul>
     {% endblock %}
