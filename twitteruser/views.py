@@ -57,6 +57,6 @@ def profile_view(request, user_id):
     profile_tweets = Tweet.objects.filter(author_id=user_id)
     tweet_count = Tweet.objects.filter(author_id=user_id).count()
     return render(request, 'profile.html', {"follower_count": follower_count, "profile_user":profile_user, "tweet_count": tweet_count, "followers": followers, "profile_tweets": profile_tweets})
-    # add number of and possibly list of followers
+    
 
 
