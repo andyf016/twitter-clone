@@ -4,6 +4,7 @@ from tweet.models import Tweet
 from tweet.forms import TweetForm
 from twitteruser.models import CustomUser
 from notification.models import Notification
+from django.views.generic import TemplateView
 import re
 
 
