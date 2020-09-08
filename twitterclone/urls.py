@@ -23,7 +23,7 @@ from notification import views as notifyviews
 urlpatterns = [
     path('', userviews.Index.as_view(), name='home'),
     path('all_tweets/', tweetviews.all_view, name='all'),
-    path('profile/<int:user_id>', userviews.profile_view, name='profile'),
+    path('profile/<int:user_id>', userviews.ProfileView.as_view(), name='profile'),
     path('following/<int:user_id>/', userviews.follow_view, name='follow'),
     path('unfollow/<int:user_id>/', userviews.unfollow_view),
     path('newtweet/', tweetviews.tweet_form_view, name='newtweet'),

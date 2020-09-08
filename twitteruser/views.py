@@ -71,13 +71,22 @@ def unfollow_view(request, user_id):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
 
-def profile_view(request, user_id):
-    profile_user = CustomUser.objects.filter(id=user_id).first()
-    followers = profile_user.following.all()
-    follower_count = profile_user.following.count()
-    profile_tweets = Tweet.objects.filter(author_id=user_id)
-    tweet_count = Tweet.objects.filter(author_id=user_id).count()
-    return render(request, 'profile.html', {"follower_count": follower_count, "profile_user":profile_user, "tweet_count": tweet_count, "followers": followers, "profile_tweets": profile_tweets})
+# def profile_view(request, user_id):
+#   profile_user = CustomUser.objects.filter(id=user_id).first()
+#   followers = profile_user.following.all()
+#   follower_count = profile_user.following.count()
+#   profile_tweets = Tweet.objects.filter(author_id=user_id)
+#   tweet_count = Tweet.objects.filter(author_id=user_id).count()
+#   return render(request, 'profile.html', {"follower_count": follower_count, "profile_user":profile_user, "tweet_count": tweet_count, "followers": followers, "profile_tweets": profile_tweets})
     
+class ProfileView(TemplateView):
+
+    def get(self, request, user_id):
+        profile_user = CustomUser.objects.filter(id=user_id).first()
+        followers = profile_user.following.all()
+        follower_count = profile_user.following.count()
+        profile_tweets = Tweet.objects.filter(author_id=user_id)
+        tweet_count = Tweet.objects.filter(author_id=user_id).count()
+        return render(request, 'profile.html', {"follower_count": follower_count, "profile_user":profile_user, "tweet_count": tweet_count, "followers": followers, "profile_tweets": profile_tweets})
 
 
